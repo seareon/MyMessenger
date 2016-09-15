@@ -17,15 +17,23 @@ public class ProfileDTOValidator implements Validator {
 	
 	public void validate(Object arg0, Errors arg1) {
 		// TODO Auto-generated method stub
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.EMAIL, Constants.EMAIL_HAS_A_INVALID_VALUE);
+//		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.EMAIL, Constants.EMAIL_HAS_A_INVALID_VALUE);
 		
 		ProfileDTO profileDTO = (ProfileDTO) arg0; 
 		String email = profileDTO.getUser().getEmail();
 		
 		if(email != null) {
 			if(!Util.isEMail(email)) {
-				arg1.rejectValue(Constants.EMAIL, Constants.EMAIL_HAS_A_INVALID_VALUE);
+				arg1.rejectValue(Constants.EMAIL, Constants.EMAIL_HAS_A_INVALID_VALUE);	// чёт бросает exception
 			}
 		} 
+		
+		String login = profileDTO.getUser().getLogin();
+		
+		UserDTOValidator.checkLogin(login, arg1);
+		
+		String password = profileDTO.getUser().getPassword();
+		
+		UserDTOValidator.checkPassword(password, arg1);
 	}
 }

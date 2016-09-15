@@ -19,4 +19,6 @@ public class Constants {
 	public static final String EMAIL_HAS_A_INVALID_VALUE = "label.EmailHasInvalidValue";
 	public static final String QUERY_GET_PROFILE_BY_USER_ID = 
 			"FROM  com.seareon.model.Profile P WHERE P.user.id = :id";
+	public static final String QUERY_GET_PROFILE_BY_USER_LOGIN = 
+			"FROM  com.seareon.model.Profile P WHERE P.user.login = :login";
 }

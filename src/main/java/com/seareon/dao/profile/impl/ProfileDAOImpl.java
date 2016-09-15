@@ -48,4 +48,12 @@ public class ProfileDAOImpl implements ProfileDAO {
 		return (Profile) query.uniqueResult();
 	}
 
+	public Profile getProfileByUserLogin(String userLogin) {
+		// TODO Auto-generated method stub
+		Query query = sessionFactory.getCurrentSession().createQuery(Constants.QUERY_GET_PROFILE_BY_USER_LOGIN);
+		query.setParameter("login", userLogin);
+		Profile profile = (Profile) query.uniqueResult();
+		return profile;
+	}
+
 }

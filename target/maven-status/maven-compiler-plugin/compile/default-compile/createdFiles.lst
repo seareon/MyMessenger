@@ -1,4 +1,6 @@
 com\seareon\dto\ProfileDTO.class
+com\seareon\controller\PostController.class
+com\seareon\converter\post\PostDTOPost.class
 com\seareon\service\profile\impl\ProfileServiceImpl.class
 com\seareon\dao\user\impl\UserDAOImpl.class
 com\seareon\dto\PostDTO.class
@@ -12,10 +14,14 @@ com\seareon\validators\UserDTOValidator.class
 com\seareon\converter\user\UserDTOUser.class
 com\seareon\util\Util.class
 com\seareon\model\Post.class
+com\seareon\dao\post\impl\PostDAPOImpl.class
 com\seareon\model\User.class
 com\seareon\service\user\impl\UserServiceImpl.class
 com\seareon\dao\user\UserDAO.class
 com\seareon\dao\profile\ProfileDAO.class
+com\seareon\service\post\PostService.class
 com\seareon\util\Constants.class
+com\seareon\dao\post\PostDAO.class
+com\seareon\service\post\impl\PostServiceImpl.class
 com\seareon\service\profile\ProfileService.class
 com\seareon\service\user\UserService.class

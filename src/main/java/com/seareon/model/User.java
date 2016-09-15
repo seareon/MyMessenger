@@ -58,7 +58,7 @@ public class User {
 		this.profile = profile;
 	}
 	
-	public Profile getUserInfo() {
+	public Profile getProfile() {
 		return profile;
 	}
 }

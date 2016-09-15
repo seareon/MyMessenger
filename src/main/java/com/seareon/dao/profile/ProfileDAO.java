@@ -8,4 +8,5 @@ public interface ProfileDAO {
     void updateProfile(Profile profile);
     Profile getProfile(long id);
     Profile getProfileByUserId(long id);
+    Profile getProfileByUserLogin(String userLogin);
 }

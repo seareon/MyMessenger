@@ -12,7 +12,11 @@ public class ProfileDTOProfile {
 		profile.setFirstName(profileDTO.getFirstName());
 		profile.setGender(profileDTO.getGender());
 		profile.setLastName(profileDTO.getLastName());
+		if(profileDTO.getUser() != null) {
+			profileDTO.getUser().setProfile(profile);
+		}
 		profile.setUser(profileDTO.getUser());
+		profile.setPosts(profileDTO.getPosts());
 		return profile;
 	}
 	
@@ -25,6 +29,7 @@ public class ProfileDTOProfile {
 		profileDTO.setGender(profile.getGender());
 		profileDTO.setLastName(profile.getLastName());
 		profileDTO.setUser(profile.getUser());
+		profileDTO.setPosts(profile.getPosts());
 		return profileDTO;
 	}
 }

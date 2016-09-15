@@ -11,36 +11,42 @@ import com.seareon.util.Constants;
 
 @Component
 public class UserDTOValidator implements Validator {
-	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
-		return UserDTO.class.isAssignableFrom(arg0);
-	}
-
+    public boolean supports(Class<?> aClass) {
+        return false;
+    }
+	
 	public void validate(Object arg0, Errors arg1) {
 		// TODO Auto-generated method stub
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.LOGIN, Constants.LOGIN_IS_EMPTY);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.PASSWORD, Constants.PASSWORD_IS_EMPTY);
+/*		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.LOGIN, Constants.LOGIN_IS_EMPTY);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.PASSWORD, Constants.PASSWORD_IS_EMPTY); */
 		
 		UserDTO userDTO = (UserDTO)arg0;
 		String log = userDTO.getLogin();
 		
-		if(!Util.isLogin(log)) {
+		checkLogin(log, arg1);
+		
+/*		if(!Util.isLogin(log)) {
 			arg1.rejectValue(Constants.LOGIN, Constants.LOGIN_IS_NOT_BY_A_REGULAR_EXPRESSION);
-		}
+		} */
 		
 		String pass = userDTO.getPassword();
 		
-		if(!Util.isPassword(pass)) {
+		checkPassword(pass, arg1);
+		
+	/*	if(!Util.isPassword(pass)) {
 			arg1.rejectValue(Constants.PASSWORD, Constants.PASSWORD_IS_NOT_BY_A_REGULAR_EXPRESSION);
-		}
-		
-/*		String email = user.getEmail();
-		
-		if(email != null) {
-			if(!Util.isEMail(email)) {
-				arg1.rejectValue(Constants.EMAIL, Constants.EMAIL_HAS_A_INVALID_VALUE);
-			}
 		} */
 	}
-
+	
+	static void checkLogin(String login, Errors errors) {
+		if(!Util.isLogin(login)) {
+			errors.rejectValue(Constants.LOGIN, Constants.LOGIN_IS_NOT_BY_A_REGULAR_EXPRESSION);
+		}
+	}
+	
+	static void checkPassword(String password, Errors errors) {
+		if(!Util.isPassword(password)) {
+			errors.rejectValue(Constants.PASSWORD, Constants.PASSWORD_IS_NOT_BY_A_REGULAR_EXPRESSION);
+		}
+	}
 }

@@ -1,5 +1,9 @@
 package com.seareon.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.seareon.model.Post;
 import com.seareon.model.User;
 
 public class ProfileDTO {
@@ -10,6 +14,15 @@ public class ProfileDTO {
 	private String city;
 	private String country;
 	private User user;
+	private Set<Post> posts = new HashSet<Post>();
+	
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
+	}
 	
 	public User getUser() {
 		return user;
