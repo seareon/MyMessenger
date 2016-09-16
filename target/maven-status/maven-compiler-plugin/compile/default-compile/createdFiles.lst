@@ -1,3 +1,4 @@
+com\seareon\controller\ProfileController.class
 com\seareon\dto\ProfileDTO.class
 com\seareon\controller\PostController.class
 com\seareon\converter\post\PostDTOPost.class

@@ -8,4 +8,5 @@ public interface UserService {
 	public User getUser(UserDTO userDTO);
 	public long saveUser(User user);
 	public User getUser(User user);
+	public void updateUser(User user);
 }

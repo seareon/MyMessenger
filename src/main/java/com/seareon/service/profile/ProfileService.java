@@ -8,7 +8,7 @@ import com.seareon.model.Profile;
 public interface ProfileService {
 	public long saveProfile(Profile profile);
 	public void deleteProfile(long id);
-	public void updateProfile(ProfileDTO profileDTO);
+	public void updateProfile(Profile profileDTO);
 	public ProfileDTO getProfileDTOById(long id);
 	public Profile getProfileById(long id);
 	public Profile getProfileByUserId(long id);

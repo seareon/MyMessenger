@@ -26,10 +26,10 @@ public class ProfileServiceImpl implements ProfileService {
 		profileDAO.deleteProfile(id);
 	}
 
-	public void updateProfile(ProfileDTO profileDTO) {
+	public void updateProfile(Profile profileDTO) {
 		// TODO Auto-generated method stub
-		Profile profile = ProfileDTOProfile.ProfileDTOToProfileConvert(profileDTO);
-		profileDAO.updateProfile(profile);
+//		Profile profile = ProfileDTOProfile.ProfileDTOToProfileConvert(profileDTO);
+		profileDAO.updateProfile(profileDTO);
 }
 
 	public ProfileDTO getProfileDTOById(long id) {

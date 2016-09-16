@@ -57,7 +57,7 @@ public class AuthorizationController {
 				session.setAttribute("userId", userId);
 				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(profile));
 				model.put("postDTO", new PostDTO());
-				return "";		
+				return "pageOfPosts";		
 			}
 			model.addAttribute("errors", "A user with the same username exists!");
 			return "registration";
@@ -74,11 +74,11 @@ public class AuthorizationController {
 		if(!result.hasErrors()) {
 			User user = userService.getUser(userDTO);
 			if(user != null) {
-				model.put("profileDTO", profileService.getProfileDTOByUserId(user.getId()));	
+				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(user.getProfile())); 	
 				model.put("postDTO", new PostDTO());
-				session.setAttribute("profileId", profileService.getProfileByUserId(user.getId()).getId());		
+				session.setAttribute("profileId", user.getProfile().getId());		
 				session.setAttribute("userId", user.getId());
-				return "PageOfPosts";		
+				return "pageOfPosts";		
 			}
 			model.addAttribute("errors", "A user with the same username does not exist!");
 			return "authorization";

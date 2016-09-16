@@ -36,6 +36,9 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDAO.getUserByName(user.getLogin());
 	}
-	
-	
+
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userDAO.updateUser(user);
+	}
 }

@@ -33,5 +33,8 @@
 		out.println("<div>" + post.getMessage() + "</div>");
 	   }
 	%>
+	<span style="float: right">
+		<a href="profileInfo">Profile page</a>
+	</span>
 </body>
 </html>

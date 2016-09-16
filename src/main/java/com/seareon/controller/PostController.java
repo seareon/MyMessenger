@@ -42,6 +42,13 @@ public class PostController {
 		}
 		model.put("profileDTO",ProfileDTOProfile.ProfileToProfileDTOConvert(profile));
 		model.put("postDTO", new PostDTO());
-		return "PageOfPosts";
+		return "pageOfPosts";
+	}
+	
+	@RequestMapping("/postPage")
+	public String createPage(HttpSession session, ModelMap model) {
+		model.put("profileDTO", profileService.getProfileDTOById((Long) session.getAttribute("profileId"))); 	
+		model.put("postDTO", new PostDTO());
+		return "pageOfPosts";
 	}
 }

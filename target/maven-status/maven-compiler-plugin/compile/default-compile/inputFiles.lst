@@ -15,6 +15,7 @@ D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\dto\Us
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\util\Util.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\converter\user\UserDTOUser.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\dao\profile\impl\ProfileDAOImpl.java
+D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\controller\ProfileController.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\service\profile\ProfileService.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\converter\post\PostDTOPost.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\model\Profile.java
