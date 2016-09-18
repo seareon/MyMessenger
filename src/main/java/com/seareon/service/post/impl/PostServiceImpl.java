@@ -24,9 +24,8 @@ public class PostServiceImpl implements PostService {
 		postDAO.deletePost(id);
 	}
 
-	public void updatePost(PostDTO postDTO) {
+	public void updatePost(Post post) {
 		// TODO Auto-generated method stub
-		Post post = PostDTOPost.PostDTOToPostConvert(postDTO);
 		postDAO.updatePost(post);
 	}
 

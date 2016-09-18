@@ -1,15 +1,20 @@
 package com.seareon.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.seareon.converter.post.PostDTOPost;
 import com.seareon.converter.profile.ProfileDTOProfile;
 import com.seareon.dto.PostDTO;
@@ -49,6 +54,30 @@ public class PostController {
 	public String createPage(HttpSession session, ModelMap model) {
 		model.put("profileDTO", profileService.getProfileDTOById((Long) session.getAttribute("profileId"))); 	
 		model.put("postDTO", new PostDTO());
+		return "pageOfPosts";
+	}
+	
+	@RequestMapping(value = "**/postUpdate/{num}", method = RequestMethod.POST)
+	public String updatePost(@PathVariable(value = "num") int num, HttpSession session, HttpServletRequest req, 
+			ModelMap model) {
+		String str = req.getParameter("message");
+		try {
+			Profile profile = profileService.getProfileById((Long) session.getAttribute("profileId"));
+			Set<Post> posts = profile.getPosts();
+			Iterator<Post> it = posts.iterator();
+			for(int i = 0; i < num; i++) 
+				if(it.hasNext())
+					it.next();
+			Post post = it.next();
+			post.setMessage(str);
+			post.setDate(new Date());
+			postService.updatePost(post);
+			model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(profile));
+			model.put("postDTO", new PostDTO());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "pageOfPosts";
 	}
 }
