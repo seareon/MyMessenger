@@ -2,6 +2,7 @@ package com.seareon.controller;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class PostController {
 	@Autowired
 	PostService postService;
 	
-	@RequestMapping("/postSave")
+	@RequestMapping("**/postSave")
 	public String savePost(@ModelAttribute("postDTO") PostDTO postDTO, HttpSession session, ModelMap model) {
 		Profile profile = null;
 		try {
@@ -62,17 +63,11 @@ public class PostController {
 			ModelMap model) {
 		String str = req.getParameter("message");
 		try {
-			Profile profile = profileService.getProfileById((Long) session.getAttribute("profileId"));
-			Set<Post> posts = profile.getPosts();
-			Iterator<Post> it = posts.iterator();
-			for(int i = 0; i < num; i++) 
-				if(it.hasNext())
-					it.next();
-			Post post = it.next();
+			Post post = postService.getPost(num);
 			post.setMessage(str);
 			post.setDate(new Date());
 			postService.updatePost(post);
-			model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(profile));
+			model.put("profileDTO", profileService.getProfileDTOById((Long) session.getAttribute("profileId")));
 			model.put("postDTO", new PostDTO());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

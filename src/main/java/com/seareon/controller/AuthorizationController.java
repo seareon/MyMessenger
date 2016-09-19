@@ -1,5 +1,7 @@
 package com.seareon.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +33,9 @@ public class AuthorizationController {
 	ProfileService profileService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String createPageAuthorization(ModelMap model) {
+	public String createPageAuthorization(ModelMap model, HttpSession session) {
 		model.put("userDTO", new UserDTO());
+		session.setAttribute("locale", "en");
 		return "authorization";
 	}
 	
@@ -78,6 +81,11 @@ public class AuthorizationController {
 				model.put("postDTO", new PostDTO());
 				session.setAttribute("profileId", user.getProfile().getId());		
 				session.setAttribute("userId", user.getId());
+				if(Locale.getDefault().getLanguage().equals("en")) {
+					model.put("valButton", "Edit");
+				} else {
+					model.put("valButton", "Редактировать");
+				} 
 				return "pageOfPosts";		
 			}
 			model.addAttribute("errors", "A user with the same username does not exist!");

@@ -7,5 +7,5 @@ public interface PostService {
 	long savePost(PostDTO postDTO);
 	void deletePost(long id);
 	void updatePost(Post post);
-	PostDTO getPost(long id);
+	Post getPost(long id);
 }

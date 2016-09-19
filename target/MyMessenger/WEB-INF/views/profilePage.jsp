@@ -8,52 +8,64 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Profile ${profileDTO.getUser().getLogin()}</h1>
+	<span style="float: right">
+    	<a href="profileInfo?lang=en">en</a> 
+    	| 
+    	<a href="profileInfo?lang=ru">ru</a>
+	</span><br>
+	<h1>
+		<spring:message code="label.Profile"/> 
+		${profileDTO.getUser().getLogin()}
+	</h1>
 	<table> 
 		<tr>
-			<td>Email: </td>
+			<td><spring:message code="label.Email"/>: </td>
 			<td>
 				${profileDTO.getUser().getEmail()}
 			</td>
 		</tr>
 		<tr>
-			<td>First name: </td>
+			<td><spring:message code="label.FirstName"/>: </td>
 			<td>
 				${profileDTO.getFirstName()}
 			</td>	
 		</tr>
 		<tr>
-			<td>Last name: </td>
+			<td><spring:message code="label.LastName"/>: </td>
 			<td>
 				${profileDTO.getLastName()}
 			</td>
 		</tr>
 		<tr>
-			<td>Age: </td>
+			<td><spring:message code="label.Age"/>: </td>
 			<td>
 				${profileDTO.getAge()}
 			</td>
 		</tr>
 		<tr>
-			<td>Gender: </td>
+			<td><spring:message code="label.Gender"/>: </td>
 			<td>
 				${profileDTO.getGender()}
 			</td>
 		</tr>	
 		<tr>
-			<td>City: </td>
+			<td><spring:message code="label.City"/>: </td>
 			<td>
 				${profileDTO.getCity()}
 			</td>
 		</tr>
 		<tr>
-			<td>Country: </td>
+			<td><spring:message code="label.Country"/>: </td>
 			<td>
 				${profileDTO.getCountry()}
 			</td>
 		</tr>
 	</table>
-	<a href="edit">Edit profile</a><br>
-	<a href="postPage">Post page</a>
+	<a href="edit">
+		<spring:message code="label.EditProfile"/>
+	</a><br>
+	<a href="postPage">
+		<spring:message code="label.PostPage"/>
+	</a>
 </body>
 </html>

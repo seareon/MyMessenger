@@ -29,9 +29,9 @@ public class PostServiceImpl implements PostService {
 		postDAO.updatePost(post);
 	}
 
-	public PostDTO getPost(long id) {
+	public Post getPost(long id) {
 		// TODO Auto-generated method stub
-		return PostDTOPost.PostToPostDTOConvert(postDAO.getPost(id));
+		return postDAO.getPost(id);
 	}
 	
 }

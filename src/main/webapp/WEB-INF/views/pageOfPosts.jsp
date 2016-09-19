@@ -1,13 +1,17 @@
 <%@page import="com.seareon.dto.ProfileDTO"%>
 <%@page import="com.seareon.model.Post"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Locale"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="j" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -15,45 +19,46 @@
 		border: 1px solid grey;
 		width: 200px;
 	}
-	h4 {
-		
+	h4 {		
 	}
 </style>
 <script type="text/javascript">
-	function editPost(id) {
-		var div = document.getElementById('div' + id);
-		var message = div.firstChild;
-		var text = message.textContent;
-		var button = document.getElementById('button' + id);
-		var form = document.createElement('form');
-		form.setAttribute('action', 'postUpdate/' + id);
-		form.setAttribute('method', 'post');
-		form.innerHTML = '<textarea rows="5" cols="30" name="message">' + text + '</textarea><br>' +
-						'<input type="submit" value="Save">';//</form>';
-		document.body.removeChild(button);
-		document.body.replaceChild(form, div);
+	function editPost(id, valButton) {
+		var newElem = $('<form action="postUpdate/' + id + '" method="post"/>').append('<textarea rows="5" cols="30"' +
+			' name="message">' + $('#div' + id).text() + '</textarea>').append('<br>').append('<input type="submit" value="' + 
+					valButton + '"></form>');
+		$('#div' + id).replaceWith(newElem);
+		$('#button' + id).remove();
 	}
 </script>
 </head>
 <body>
 	<span style="float: right">
-		<a href="profileInfo">Profile page</a>
+    	<a href="postPage?lang=en">en</a> 
+    	| 
+    	<a href="postPage?lang=ru">ru</a>
+	</span><br>
+	<span style="float: right">
+		<a href="profileInfo"><spring:message code="label.ProfilePage"/></a>
 	</span>
-	<c:form action="post" commandName="postDTO">
-		<c:textarea rows="5" cols="30" path="message"/><br>
-		<c:button formaction="postSave" type="submit">Submit</c:button>
-	</c:form>
-	<% SimpleDateFormat dateFormat = new SimpleDateFormat();
-	   ProfileDTO profile = (ProfileDTO) request.getAttribute("profileDTO");
-	   int count = 0;
-	   for(Post post : profile.getPosts()) {
-		out.println("<h4>" + profile.getFirstName() + " " + profile.getLastName() + "</h4>");
-		out.println("<p>" + dateFormat.format(post.getDate()) + "</p>");
-		out.println("<div id=\"div" + count + "\">" + post.getMessage() + "</div>");
-		String str = "<input type=\"button\" id=\"button" + count + "\" value=\"Edit\" onClick=\"editPost(\'" + 
-			(count++) +"\')\">";
-		out.println(str);
-	   }
-	%>
+	<form:form action="post" commandName="postDTO">
+		<form:textarea rows="5" cols="30" path="message"/><br>
+		<form:button formaction="postSave" type="submit">
+			<spring:message code="label.Submit"/>
+		</form:button>
+	</form:form>
+	<c:set var="valButtonEdit">
+		<spring:message code="label.Edit"/>
+	</c:set>
+	<c:set var="valButtonSave">
+		<spring:message code="label.Save"/>
+	</c:set>
+	<c:forEach var="post" items="${profileDTO.posts}">
+		<p><c:out value="${profileDTO.firstName} ${profileDTO.lastName}"/></p>
+		<fmt:formatDate value="${post.date}" pattern="dd-MM-yyyy hh:mm" />
+		<div id="div${post.id}">${post.message}</div>
+		<input type="button" id="button${post.id}" value=
+								"${valButtonEdit}" onClick="editPost('${post.id}', '${valButtonSave}')">
+	</c:forEach>
 </body>
 </html>
