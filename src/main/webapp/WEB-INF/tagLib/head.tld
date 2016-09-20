@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_1.xsd">
+	<tlib-version>1.0</tlib-version>
+  	<short-name>exit</short-name>
+ 	 <uri>/WEB-INF/tagLib/head</uri>
+ 	 <tag>
+  		<name>head</name>
+  		<tag-class>com.seareon.jstl.HeadTag</tag-class>
+  		<body-content>empty</body-content>
+  		<info>Out of the user</info>
+  		<attribute>
+  			<name>href</name>
+            <required>true</required>
+            <description>It contains a link</description>
+            <rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+  			<name>name</name>
+            <required>true</required>
+            <description>It contains users name</description>
+            <rtexprvalue>false</rtexprvalue>
+		</attribute>
+  	</tag>
+</taglib>

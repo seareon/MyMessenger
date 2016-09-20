@@ -23,6 +23,7 @@ D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\model\
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\dao\user\UserDAO.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\dao\user\impl\UserDAOImpl.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\dao\post\PostDAO.java
+D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\jstl\HeadTag.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\dao\post\impl\PostDAPOImpl.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\validators\UserDTOValidator.java
 D:\work\работа\JAVA\course_JAVA_Pro\MyMessenger\src\main\java\com\seareon\controller\PostController.java

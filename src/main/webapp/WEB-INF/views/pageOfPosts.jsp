@@ -8,7 +8,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="/WEB-INF/tagLib/head.tld" prefix="h"%>
 <html>
 <head>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -33,11 +34,16 @@
 </script>
 </head>
 <body>
-	<span style="float: right">
-    	<a href="postPage?lang=en">en</a> 
-    	| 
-    	<a href="postPage?lang=ru">ru</a>
-	</span><br>
+	<c:set var="userName">
+		<spring:message code="${sessionScope.userName}"/>
+	</c:set>
+	<c:set var="valButtonEdit">
+		<spring:message code="label.Edit"/>
+	</c:set>
+	<c:set var="valButtonSave">
+		<spring:message code="label.Save"/>
+	</c:set>
+	<h:head href="postPage" name="<%session.getAttribute("userName");%>"/>
 	<span style="float: right">
 		<a href="profileInfo"><spring:message code="label.ProfilePage"/></a>
 	</span>
@@ -47,12 +53,6 @@
 			<spring:message code="label.Submit"/>
 		</form:button>
 	</form:form>
-	<c:set var="valButtonEdit">
-		<spring:message code="label.Edit"/>
-	</c:set>
-	<c:set var="valButtonSave">
-		<spring:message code="label.Save"/>
-	</c:set>
 	<c:forEach var="post" items="${profileDTO.posts}">
 		<p><c:out value="${profileDTO.firstName} ${profileDTO.lastName}"/></p>
 		<fmt:formatDate value="${post.date}" pattern="dd-MM-yyyy hh:mm" />

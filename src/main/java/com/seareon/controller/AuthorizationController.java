@@ -32,7 +32,7 @@ public class AuthorizationController {
 	@Autowired
 	ProfileService profileService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "**/", method = RequestMethod.GET)
 	public String createPageAuthorization(ModelMap model, HttpSession session) {
 		model.put("userDTO", new UserDTO());
 		session.setAttribute("locale", "en");
@@ -81,11 +81,7 @@ public class AuthorizationController {
 				model.put("postDTO", new PostDTO());
 				session.setAttribute("profileId", user.getProfile().getId());		
 				session.setAttribute("userId", user.getId());
-				if(Locale.getDefault().getLanguage().equals("en")) {
-					model.put("valButton", "Edit");
-				} else {
-					model.put("valButton", "Редактировать");
-				} 
+				session.setAttribute("userName", user.getLogin());
 				return "pageOfPosts";		
 			}
 			model.addAttribute("errors", "A user with the same username does not exist!");

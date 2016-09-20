@@ -1,8 +1,6 @@
 package com.seareon.controller;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;

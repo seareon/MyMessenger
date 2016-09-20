@@ -2,7 +2,6 @@ package com.seareon.validators;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import com.seareon.dto.ProfileDTO;
 import com.seareon.util.Constants;

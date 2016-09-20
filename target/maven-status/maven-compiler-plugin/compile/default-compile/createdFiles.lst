@@ -8,6 +8,7 @@ com\seareon\dto\PostDTO.class
 com\seareon\controller\AuthorizationController.class
 com\seareon\converter\profile\ProfileDTOProfile.class
 com\seareon\model\Profile.class
+com\seareon\jstl\HeadTag.class
 com\seareon\dao\profile\impl\ProfileDAOImpl.class
 com\seareon\dto\UserDTO.class
 com\seareon\validators\ProfileDTOValidator.class
