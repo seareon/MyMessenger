@@ -34,8 +34,8 @@
 </script>
 </head>
 <body>
-	<c:set var="userName">
-		<spring:message code="${sessionScope.userName}"/>
+	<c:set var="valButtonExit">
+		<spring:message code="label.Exit"/>
 	</c:set>
 	<c:set var="valButtonEdit">
 		<spring:message code="label.Edit"/>
@@ -43,7 +43,7 @@
 	<c:set var="valButtonSave">
 		<spring:message code="label.Save"/>
 	</c:set>
-	<h:head href="postPage" name="<%session.getAttribute("userName");%>"/>
+	<h:head href="postPage" name="${sessionScope.userName}" buttonName="${valButtonExit}"/>
 	<span style="float: right">
 		<a href="profileInfo"><spring:message code="label.ProfilePage"/></a>
 	</span>

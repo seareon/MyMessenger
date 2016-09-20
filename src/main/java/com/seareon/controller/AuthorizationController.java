@@ -35,7 +35,6 @@ public class AuthorizationController {
 	@RequestMapping(value = "**/", method = RequestMethod.GET)
 	public String createPageAuthorization(ModelMap model, HttpSession session) {
 		model.put("userDTO", new UserDTO());
-		session.setAttribute("locale", "en");
 		return "authorization";
 	}
 	
@@ -79,9 +78,9 @@ public class AuthorizationController {
 			if(user != null) {
 				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(user.getProfile())); 	
 				model.put("postDTO", new PostDTO());
+				session.setAttribute("userName", user.getLogin());
 				session.setAttribute("profileId", user.getProfile().getId());		
 				session.setAttribute("userId", user.getId());
-				session.setAttribute("userName", user.getLogin());
 				return "pageOfPosts";		
 			}
 			model.addAttribute("errors", "A user with the same username does not exist!");
