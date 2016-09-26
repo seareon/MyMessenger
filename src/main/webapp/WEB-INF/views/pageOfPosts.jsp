@@ -55,7 +55,7 @@
 	</span>
 	<form:form action="post" commandName="userDTO">
 		<form:input path="login"/>
-		<form:button formaction="searchUser" type="submit">
+		<form:button formaction="searchUser" type="submit"> 
 			<spring:message code="label.Submit"/>
 		</form:button>
 	</form:form>
