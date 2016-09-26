@@ -15,9 +15,7 @@ public class ProfileDTOValidator implements Validator {
 	}
 	
 	public void validate(Object arg0, Errors arg1) {
-		// TODO Auto-generated method stub
-//		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.EMAIL, Constants.EMAIL_HAS_A_INVALID_VALUE);
-		
+		// TODO Auto-generated method stub		
 		ProfileDTO profileDTO = (ProfileDTO) arg0; 
 		String email = profileDTO.getUser().getEmail();
 		
@@ -29,10 +27,14 @@ public class ProfileDTOValidator implements Validator {
 		
 		String login = profileDTO.getUser().getLogin();
 		
-		UserDTOValidator.checkLogin(login, arg1);
+		if(!Util.isLogin(login)) {
+			arg1.rejectValue(Constants.USER_LOGIN, Constants.LOGIN_IS_NOT_BY_A_REGULAR_EXPRESSION);
+		}
 		
 		String password = profileDTO.getUser().getPassword();
 		
-		UserDTOValidator.checkPassword(password, arg1);
+		if(!Util.isPassword(password)) {
+			arg1.rejectValue(Constants.USER_PASSWORD, Constants.PASSWORD_IS_NOT_BY_A_REGULAR_EXPRESSION);
+		}
 	}
 }

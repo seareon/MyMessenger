@@ -18,6 +18,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<c:if test="${not empty sessionScope.profileId}">
+			<%response.sendRedirect(request.getContextPath()+"/postPage");%>
+		</c:if>
 		<c:set var="valButtonCreate">
 			<spring:message code="label.Create"/>
 		</c:set>

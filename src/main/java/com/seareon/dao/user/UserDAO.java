@@ -7,5 +7,5 @@ public interface UserDAO {
     void updateUser(User user);
     User getUser(long id);
     User getUserByName(String login);
-    void deleteUserById(long id);
+//    void deleteUserById(long id);
 }

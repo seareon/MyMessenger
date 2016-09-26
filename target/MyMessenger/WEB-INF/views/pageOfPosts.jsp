@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="/head" prefix="h"%>
+<%@ taglib uri="/WEB-INF/tagLib/head.tld" prefix="h"%>
 <html>
 <head>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -34,6 +34,12 @@
 </script>
 </head>
 <body>
+	<c:if test="${empty sessionScope.profileId}">
+		<%response.sendRedirect(request.getContextPath()+"/WEB-INF/views/authorization.jsp");%>
+	</c:if>
+	<c:set var="valButtonDelete">
+		<spring:message code="label.Delete"/>
+	</c:set>
 	<c:set var="valButtonExit">
 		<spring:message code="label.Exit"/>
 	</c:set>
@@ -43,22 +49,33 @@
 	<c:set var="valButtonSave">
 		<spring:message code="label.Save"/>
 	</c:set>
-	<h:head href="postPage" name="${sessionScope.userName}"/>
+	<h:head href="postPage" name="${sessionScope.userName}" buttonName="${valButtonExit}"/>
 	<span style="float: right">
 		<a href="profileInfo"><spring:message code="label.ProfilePage"/></a>
 	</span>
-	<form:form action="post" commandName="postDTO">
-		<form:textarea rows="5" cols="30" path="message"/><br>
-		<form:button formaction="postSave" type="submit">
+	<form:form action="post" commandName="userDTO">
+		<form:input path="login"/>
+		<form:button formaction="searchUser" type="submit">
 			<spring:message code="label.Submit"/>
 		</form:button>
 	</form:form>
-	<c:forEach var="post" items="${profileDTO.posts}">
-		<p><c:out value="${profileDTO.firstName} ${profileDTO.lastName}"/></p>
+	<form:form action="post" commandName="postDTO">
+		<form:textarea rows="5" cols="30" path="message"/><br>
+		<form:button formaction="postSave" type="submit">
+			<spring:message code="label.Subscribe"/>
+		</form:button>
+	</form:form>
+	<c:forEach var="post" items="${posts}">
+		<p><c:out value="${post.profileOwner.firstName} $post.profileOwner.lastName}"/></p>
 		<fmt:formatDate value="${post.date}" pattern="dd-MM-yyyy hh:mm" />
 		<div id="div${post.id}">${post.message}</div>
-		<input type="button" id="button${post.id}" value=
+		<c:if test="${sessionScope.profileId == post.profileOwner.id}">
+			<input type="button" id="button${post.id}" value=
 								"${valButtonEdit}" onClick="editPost('${post.id}', '${valButtonSave}')">
+			<form action="deletePost/${post.id}" method="post">
+				<input type="submit" value="${valButtonDelete}">
+			</form>
+		</c:if>
 	</c:forEach>
 </body>
 </html>

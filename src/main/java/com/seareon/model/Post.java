@@ -11,11 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "messages")
-public class Post {
+public class Post implements Comparable<Post>{
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,23 @@ public class Post {
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
 	
+	@OneToOne
+	@JoinColumn(name = "owner")
+	Profile profileOwner;
+
 	@Column(name = "message")
 	private String message;
 	
 	@Column(name = "date")
 	private Date date;
+	
+	public Profile getProfileOwner() {
+		return profileOwner;
+	}
+
+	public void setProfileOwner(Profile profileOwner) {
+		this.profileOwner = profileOwner;
+	}
 
 	public Long getId() {
 		return id;
@@ -61,5 +74,10 @@ public class Post {
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+
+	public int compareTo(Post o) {
+		// TODO Auto-generated method stub
+		return (o.date).compareTo(this.date);
 	}
 }

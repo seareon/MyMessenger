@@ -21,14 +21,8 @@ public class ProfileServiceImpl implements ProfileService {
 		return id;//profileDAO.saveProfile(profile);
 	}
 
-	public void deleteProfile(long id) {
-		// TODO Auto-generated method stub
-		profileDAO.deleteProfile(id);
-	}
-
 	public void updateProfile(Profile profileDTO) {
 		// TODO Auto-generated method stub
-//		Profile profile = ProfileDTOProfile.ProfileDTOToProfileConvert(profileDTO);
 		profileDAO.updateProfile(profileDTO);
 }
 
@@ -53,10 +47,5 @@ public class ProfileServiceImpl implements ProfileService {
 			profileDTO = ProfileDTOProfile.ProfileToProfileDTOConvert(profile);
 		}
 		return profileDTO;
-	}
-
-	public Profile getProfileByUserId(long id) {
-		// TODO Auto-generated method stub
-		return profileDAO.getProfileByUserId(id);
 	}
 }

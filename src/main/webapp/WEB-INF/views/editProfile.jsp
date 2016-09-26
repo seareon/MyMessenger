@@ -18,6 +18,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<c:if test="${empty sessionScope.profileId}">
+			<%response.sendRedirect(request.getContextPath()+"/WEB-INF/views/authorization.jsp");%>
+		</c:if>
 		<c:set var="valButtonSave">
 			<spring:message code="label.Save"/>
 		</c:set>

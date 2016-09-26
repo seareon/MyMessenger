@@ -23,6 +23,7 @@ com\seareon\dao\user\UserDAO.class
 com\seareon\dao\profile\ProfileDAO.class
 com\seareon\service\post\PostService.class
 com\seareon\util\Constants.class
+com\seareon\controller\TagController.class
 com\seareon\dao\post\PostDAO.class
 com\seareon\service\post\impl\PostServiceImpl.class
 com\seareon\service\profile\ProfileService.class

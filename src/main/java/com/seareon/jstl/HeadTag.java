@@ -24,11 +24,11 @@ public class HeadTag extends TagSupport {
 	}
 
 	public int doStartTag() throws JspException {
-		String str = "<div style=\"width=400px; hight=50px; margin: auto; margin-bottom: 50px;  background: blue;\">"+
-				"<table><tr><td><a href=\"" + href + "?lang=en\">en</a>|<a href=\"" + href + 
-				"?lang=ru\">ru</a><br></td></tr><tr><td>" + (String)name + 
-				"</td></tr><tr><td><input type=\"button\" value=\"" + buttonName +
-				"\" onclick=\"location.href='tagExit'\"></td></tr></table></div>";
+		String str = "<div style=\"width:500px; hight:50px; margin: auto; margin-bottom: 50px;  background: blue;\">"+
+				"<table><tr style=\"margin:auto;\"><a href=\"" + href + "?lang=en\">en</a>|<a href=\"" + href + 
+				"?lang=ru\">ru</a></tr><tr style=\"margin:auto;\">" + (String)name + 
+				"</tr><trstyle=\"margin:auto;\"><input type=\"button\" value=\"" + buttonName +
+				"\" onclick=\"location.href='tagExit'\"></tr></table></div>";
 		try {
 			pageContext.getOut().print(str);
 		} catch (IOException e) {

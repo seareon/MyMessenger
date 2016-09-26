@@ -4,6 +4,8 @@
 	"http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %> 
 <html>
 	<head>
 		<title>Registration/Sing up Page</title>
@@ -16,6 +18,9 @@
 		</style>
 	</head>
 	<body>
+		<c:if test="${not empty sessionScope.profileId}">
+			<%response.sendRedirect(request.getContextPath()+"/postPage");%>
+		</c:if>
 		<span style="float: right">
     		<a href="?lang=en">en</a> 
     		| 

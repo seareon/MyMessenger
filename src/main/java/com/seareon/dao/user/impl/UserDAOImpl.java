@@ -42,12 +42,11 @@ public class UserDAOImpl implements UserDAO {
 		return (User) query.uniqueResult();
 	}
 
-	public void deleteUserById(long id) {
+/*	public void deleteUserById(long id) {
 		// TODO Auto-generated method stub
 		User user = new User();
 		user.setId(id);
 		User mergedUser = (User) sessionFactory.getCurrentSession().merge(user);
 		sessionFactory.getCurrentSession().delete(mergedUser);
-	}
-
+	} */
 }

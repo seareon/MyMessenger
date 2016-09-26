@@ -1,6 +1,9 @@
 package com.seareon.controller;
 
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import com.seareon.converter.profile.ProfileDTOProfile;
 import com.seareon.dto.PostDTO;
 import com.seareon.dto.ProfileDTO;
 import com.seareon.dto.UserDTO;
+import com.seareon.model.Post;
 import com.seareon.model.Profile;
 import com.seareon.model.User;
 import com.seareon.service.profile.ProfileService;
@@ -65,7 +69,7 @@ public class AuthorizationController {
 			return "registration";
 		}
 		
-		return "redirect:registration";
+		return "registration";
 	}
 	
 	@RequestMapping("/logIn")
@@ -76,7 +80,13 @@ public class AuthorizationController {
 		if(!result.hasErrors()) {
 			User user = userService.getUser(userDTO);
 			if(user != null) {
-				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(user.getProfile())); 	
+//				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(user.getProfile())); 	//!!!!!!!!
+				List<Post> postsList = new ArrayList<Post>( user.getProfile().getPosts());
+				for(Profile profile : user.getProfile().getSubscribers()) {
+					postsList.addAll(profile.getPosts());
+				}
+				Collections.sort(postsList);
+				model.put("posts", postsList);
 				model.put("postDTO", new PostDTO());
 				session.setAttribute("userName", user.getLogin());
 				session.setAttribute("profileId", user.getProfile().getId());		
@@ -86,6 +96,6 @@ public class AuthorizationController {
 			model.addAttribute("errors", "A user with the same username does not exist!");
 			return "authorization";
 		}
-		return "redirect:authorization";
+		return "authorization";
 	}
 }

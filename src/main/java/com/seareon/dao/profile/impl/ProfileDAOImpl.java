@@ -21,13 +21,13 @@ public class ProfileDAOImpl implements ProfileDAO {
 		return profile.getId();
 	}
 
-	public void deleteProfile(long id) {
+/*	public void deleteProfile(long id) {
 		// TODO Auto-generated method stub
 		Profile profile = new Profile();
 		profile.setId(id);
 		Profile mergedProfile = (Profile) sessionFactory.getCurrentSession().merge(profile);
 		sessionFactory.getCurrentSession().delete(mergedProfile);
-	}
+	} */
 
 	public void updateProfile(Profile profile) {
 		// TODO Auto-generated method stub

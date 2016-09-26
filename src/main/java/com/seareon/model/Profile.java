@@ -37,9 +37,24 @@ public class Profile {
 	@JoinColumn(name = "user_id")
 	User user;
 	
+	@OneToOne(mappedBy = "profileOwner")
+	Post post;
+
 	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "profile")
 	@OrderBy(value = "date")
 	private Set<Post> posts = new HashSet<Post>();
+	
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "id")
+	private Set<Profile> subscribers = new HashSet<Profile>();
+	
+	@Transactional(readOnly = true)
+	public Set<Profile> getSubscribers() {
+		return subscribers;
+	}
+	
+	public void setSubscribers(Set<Profile> subscribers) {
+		this.subscribers = subscribers;
+	}
 	
 	@Transactional(readOnly = true)
 	public Set<Post> getPosts() {
@@ -48,6 +63,14 @@ public class Profile {
 
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
+	}
+	
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	public void setFirstName(String firstName) {

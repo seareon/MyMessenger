@@ -3,6 +3,8 @@ package com.seareon.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.validation.Errors;
+
 public class Util {
 	public static boolean isNumber(String str) {
 		try {
