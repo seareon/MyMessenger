@@ -1,22 +1,27 @@
 package com.seareon.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.seareon.converter.post.PostDTOPost;
-import com.seareon.converter.profile.ProfileDTOProfile;
 import com.seareon.dto.PostDTO;
+import com.seareon.dto.PostsJSON;
 import com.seareon.dto.UserDTO;
 import com.seareon.model.Post;
 import com.seareon.model.Profile;
@@ -90,6 +95,18 @@ public class PostController {
 		if(user != null)
 			profile.getSubscribers().add(user.getProfile());
 		return "";
+	}
+	
+	@RequestMapping(value = "/getPosts", method = RequestMethod.POST)
+	public  @ResponseBody PostsJSON Subscribe(HttpSession session) {
+		Profile profile = profileService.getProfileById((Long) session.getAttribute("profileId"));
+		List<Post> postsList = new ArrayList<Post>(profile.getPosts());
+		for(Profile profileS : profile.getSubscribers()) {
+			postsList.addAll(profileS.getPosts());
+		}
+		Collections.sort(postsList);
+		PostsJSON postsJSON = new PostsJSON(postsList);
+		return postsJSON;
 	}
 	
 	private ModelMap modelFilling(HttpSession session, ModelMap model) {

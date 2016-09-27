@@ -24,12 +24,52 @@
 	}
 </style>
 <script type="text/javascript">
+	$(document).ready(function timer () {
+		setInterval("prepare()", 2000);
+	});
+	
 	function editPost(id, valButton) {
+		
 		var newElem = $('<form action="postUpdate/' + id + '" method="post"/>').append('<textarea rows="5" cols="30"' +
-			' name="message">' + $('#div' + id).text() + '</textarea>').append('<br>').append('<input type="submit" value="' + 
-					valButton + '"></form>');
+			' name="message">' + $('#div' + id).text() + '</textarea>').append('<br>').append('<input type="submit" value="' 
+					+ valButton + '"></form>');
 		$('#div' + id).replaceWith(newElem);
 		$('#button' + id).remove();
+	}
+	
+	function prepare() {
+		var data = '{"id": [';
+		$("table").each(function (index, domElem) {
+			if($(domElem).tagName == 'div')
+				data += $(domElem).getAttribute('id') + ', ';
+		});
+		data += ']}';
+		query(data);
+	}
+	
+	function query(data) {			
+		$.ajax({
+			type: 'POST',
+			url: 'getPosts',
+			dataType: 'json',
+			mimeType: 'application/json',
+			success: function(data){
+				$.each(data.posts, function(index, val) {
+					var $Table=$('<table align="center"></table>');
+					var $AttrTr=$('<tr><td>' + val.name + '</td><td>' + val.date  + '</td></tr>' +
+							'<tr>' + val.message +'</tr>');
+					$Table.append($AttrTr);
+					if(sessvars.profileId == post.profileOwner.id) {
+						$AttrTr=$('<input type="button" id="${posts[index].id}" value=' +
+								'"${valButtonEdit}" onClick="editPost(\'${post[index].id}\', \'${valButtonSave}\')">' +
+								'<form action="deletePost/${post[index].id}" method="post">' +
+									'<input type="submit" value="${valButtonDelete}">' +
+								'</form>');
+					}
+					$('div').prepend($Table);
+				});
+			}
+		});
 	}
 </script>
 </head>
@@ -55,7 +95,7 @@
 	</span>
 	<form:form action="post" commandName="userDTO">
 		<form:input path="login"/>
-		<form:button formaction="searchUser" type="submit">
+		<form:button formaction="searchUser" type="submit"> 
 			<spring:message code="label.Submit"/>
 		</form:button>
 	</form:form>
@@ -65,11 +105,16 @@
 			<spring:message code="label.Subscribe"/>
 		</form:button>
 	</form:form>
+	<script type="text/javascript">
+		function timer () {
+			setInterval("prepare()", 2000);
+		};
+	</script>
 	<c:forEach var="post" items="${posts}">
-		<p><c:out value="${post.profileOwner.firstName} $post.profileOwner.lastName}"/></p>
+		<p><c:out value="${post.profile.firstName} ${post.profile.lastName}"/></p>
 		<fmt:formatDate value="${post.date}" pattern="dd-MM-yyyy hh:mm" />
 		<div id="div${post.id}">${post.message}</div>
-		<c:if test="${sessionScope.profileId == post.profileOwner.id}">
+		<c:if test="${sessionScope.profileId == post.profile.id}">
 			<input type="button" id="button${post.id}" value=
 								"${valButtonEdit}" onClick="editPost('${post.id}', '${valButtonSave}')">
 			<form action="deletePost/${post.id}" method="post">

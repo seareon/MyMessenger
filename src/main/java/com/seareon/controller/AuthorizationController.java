@@ -3,8 +3,6 @@ package com.seareon.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,7 +78,7 @@ public class AuthorizationController {
 		if(!result.hasErrors()) {
 			User user = userService.getUser(userDTO);
 			if(user != null) {
-//				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(user.getProfile())); 	//!!!!!!!!
+//				model.put("profileDTO", ProfileDTOProfile.ProfileToProfileDTOConvert(user.getProfile())); 	
 				List<Post> postsList = new ArrayList<Post>( user.getProfile().getPosts());
 				for(Profile profile : user.getProfile().getSubscribers()) {
 					postsList.addAll(profile.getPosts());

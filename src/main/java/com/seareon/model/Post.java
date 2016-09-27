@@ -25,24 +25,12 @@ public class Post implements Comparable<Post>{
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
-	
-	@OneToOne
-	@JoinColumn(name = "owner")
-	Profile profileOwner;
 
 	@Column(name = "message")
 	private String message;
 	
 	@Column(name = "date")
 	private Date date;
-	
-	public Profile getProfileOwner() {
-		return profileOwner;
-	}
-
-	public void setProfileOwner(Profile profileOwner) {
-		this.profileOwner = profileOwner;
-	}
 
 	public Long getId() {
 		return id;
